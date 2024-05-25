@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+
+    <style>
+        #thief {
+            width: 200px;
+            height: 200px;
+            margin: 5px;
+            position: absolute;
+        }
+    </style>
+
+    <head>
+        <title>Catch The Thief</title>
+    </head>
+
+    <body>
+        <img src='thief1.png' id="thief">
+    </body>
+
+    <script>
+
+        function moveThief() {
+            const maxHeight = window.innerHeight - 100;
+            const maxWidth = window.innerWidth - 100;
+            
+            const randomTopPosition = Math.floor(Math.random() * maxHeight);
+            const randomLeftPosition = Math.floor(Math.random() * maxWidth);
+            
+            const thief = document.getElementById("thief");
+
+            thief.style.top = randomTopPosition + 'px';
+            thief.style.left = randomLeftPosition + 'px';
+        }
+
+        const interval = setInterval(moveThief, 600);
+    </script>
+
+</html>

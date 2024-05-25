@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+
+    <style>
+        .container {
+            width: 100vw;
+            height: 90vh;
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        #thief {
+            width: 200px;
+            height: 200px;
+            margin: 5px;
+            position: absolute;
+        }
+
+        #score {
+            margin-right: 20px;
+        }
+    </style>
+
+    <head>
+        <title>Catch The Thief</title>
+    </head>
+
+    <body>
+        <div class="container">
+            <img src='thief1.png' id="thief" onclick="clickedThief()">
+            <h1 id="score">Score: 0</h1>
+            <h1 id="missed">Missed: 0</h1>
+        </div>
+    </body>
+
+    <script>
+        
+        let clicked = false;
+        let caughtCounter = 0;
+        let missedCounter = 0;
+
+        function moveThief() {
+            const maxHeight = window.innerHeight - 100;
+            const maxWidth = window.innerWidth - 100;
+            
+            const randomTopPosition = Math.floor(Math.random() * maxHeight);
+            const randomLeftPosition = Math.floor(Math.random() * maxWidth);
+            
+            const thief = document.getElementById("thief");
+
+            thief.style.top = randomTopPosition + 'px';
+            thief.style.left = randomLeftPosition + 'px';
+
+            thief.src = getRandomImageSrc();
+
+            if(clicked == true) {
+                caughtThief();
+                clicked = false;
+            } else {
+                missedThief();
+            }
+        }
+
+        function clickedThief() {
+            clicked = true;
+        }
+
+
+        function caughtThief() {
+            caughtCounter += 1;
+            const scoreTag = document.getElementById('score');
+            scoreTag.innerHTML = 'Score: ' + caughtCounter;
+        }
+
+        function missedThief() {
+            missedCounter += 1;
+            const missedTag = document.getElementById('missed');
+            missedTag.innerHTML = 'Missed: ' + missedCounter;
+        }
+
+        function getRandomImageSrc() {
+            const randomNumber = Math.floor(Math.random() * 10) + 1;
+            return 'thief'+randomNumber+'.png';
+        }
+
+        const interval = setInterval(moveThief, 1000);
+
+    </script>
+
+</html>
